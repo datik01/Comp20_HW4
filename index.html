@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Lottery</title>
+	<script language="javascript" type="text/javascript">
+
+	
+		var nums = new Array();
+		for (i = 0; i<5; i++)
+		{
+			n = Math.random() * 47;
+			n+=1;
+			n= Math.round(n);
+			nums[i]=n;
+		}
+		var n_lucky= Math.random() * 17;
+		n_lucky+=1;
+		n_lucky= Math.round(n_lucky);
+		nums[5]=n_lucky;
+		document.write ("Lucky Ball: " +n_lucky+ "<br>");
+		document.write ("Unsorted random numbers: " + "<br>");
+		for (var i = nums.length - 1; i >= 0; i--) {
+			document.write (nums[i] + " ");
+		}
+
+		nums.sort((a, b) => a - b);
+		document.write("<br>");
+		document.write ("Sorted random numbers: " + "<br>");
+		for (var i=0; i <= nums.length - 1; i++) {
+			document.write (nums[i] + " ");
+		}
+
+	</script>
+</head>
+
+<body>
+	<form>
+		<div>Enter 5 #'s seperated by spaces: </div>
+		<input type="text" id="txt1" placeholder="ex: 1 2 3 4 5">
+	</br>
+		<div>Enter 1 Lucky Ball number: </div>
+		<input type="text" id="txt2" placeholder="ex: 1">
+	</br>
+		<input type='button' onclick='get_input(nums, n_lucky)' value="Calculate">
+	</form>
+	
+	<script language="javascript" type="text/javascript"> 
+		
+		
+		function get_input(a, b)
+		{
+			val1 = document.getElementById("txt1").value;
+			val2 = document.getElementById("txt2").value;
+			val3 = val1 + " " + val2;
+			var inputArray = val3.split(' ');
+			
+
+
+			for (var i=0; i <= 5; i++) {
+				for (var j=0; j <= inputArray.length-1; j++) {
+					if (a[i]==inputArray[j]) {
+						inputArray.splice(j,1);
+						break;
+					}
+				}			
+			}
+			var lucky = false;
+			if (b==val2)
+				lucky = true;
+
+			if (val1=="" || val2=="") 
+				alert("Please enter some numbers.");
+			else if (inputArray.length==0 && lucky==true) 
+				alert("5 + Lucky Ball: $7,000 a WEEK for LIFE!");
+			else if (inputArray.length==0 && lucky==false) 
+				alert("4: $200");
+			else if (inputArray.length==1 && lucky==false) 
+				alert("5: $25,000 a YEAR for LIFE!");
+			else if (inputArray.length==1 && lucky==true) 
+				alert("4 + Lucky Ball: $5,000");
+			else if (inputArray.length==2 && lucky==false) 
+				alert("4: $200");
+			else if (inputArray.length==2 && lucky==true) 
+				alert("3 + Lucky Ball: $150");
+			else if (inputArray.length==3 && lucky==false) 
+				alert("3: $20");
+			else if (inputArray.length==3 && lucky==true) 
+				alert("2 + Lucky Ball: $25");
+			else if (inputArray.length==4 && lucky==false) 
+				alert("2: $3");
+			else if (inputArray.length==4 && lucky==true) 
+				alert("1 + Lucky Ball: $6");
+			else if (inputArray.length==5 && lucky==true) 
+				alert("0 + Lucky Ball: $4");
+			else
+				alert("Sorry, you didn't win anything.")	
+		}
+		
+	</script>
+</body>
+</html>
